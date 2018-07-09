@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Trivia Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -16,13 +17,23 @@
 
     <!-- My main section for the game contents -->
     <section class="container">
-    <!-- A first row to hold the battle area of the game -->
+    <!-- A container to hold the game -->
+        <div class="main-container">
+            <h1>Totally Trivial Trivia!</h1>   
+         
+            <!-- A second row to hold the time remaining and question -->
+            <div class = "clock ">
+            Time remaining
+            </div>
+            <!-- A third row to hold the answers to the question -->
+            <div class = "question">
+                What is the question?
+            </div>
         
-    <!-- A second row to hold the set of character cards waiting for battle -->
-        <div class= "row">
-            
+            <div class = "answers">
+                Answer 1<br>Answer 2<br>Answer 3<br> Answer 4
+            </div>
         </div>
-
     </section>
     <!-- My copyright footer        -->
     <footer class="footer my-footer">
