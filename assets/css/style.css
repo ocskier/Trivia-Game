@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(219, 217, 217);
+    background: url(../images/puzzle-1816474_1920.jpg) no-repeat center center fixed;
+    background-repeat:  no-repeat;
+    background-position:  center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* Main Section */
+section {
+    min-height: calc(100vh - 70px);
+    justify-content: space-evenly;
+    text-align: center;
+    width:100%;
+}
+
+.row {
+    padding: 20px;
+}
+
+/* Footer */
+.my-footer {
+    text-align: center;
+    clear: both;
+    width: 100%;
+    font-size: 12px;
+    color: #fff;
+    color: #ccc;
+    line-height: 60px;
+    background-color: #666666;
+    border-top: 8px solid #4aaaa5;
+}

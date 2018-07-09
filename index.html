@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Trivia Game</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+</head>
+
+<body>
+    
+    <!-- My main section for the game contents -->
+    <section class="container">
+    <!-- A first row to hold the battle area of the game -->
+        <div class = "row battle-area">
+    <!-- This column holds the players character card         -->
+            <div class="col-sm-4 col-md-3" style="border: 10px solid green;">
+                <h1>Player Area</h1>
+                <div id = "playerArea">
+
+                </div> 
+            </div>
+    <!-- This column holds the attack button as well as the real-time battle info -->
+            <div class="col-sm-3 col-md-3">
+                <div>
+                    <button type = "button" class = "btn btn-outline-danger btn-lg attackbtn">Attack</button>
+                    <div class="card" style="background: transparent; border: none;">
+                        <div id="battle-txt" class="card-body"><p>Battle Area</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- This column holds the current enemy fighter character card         -->
+            <div class="col-sm-4 col-md-3" style="border: 10px solid red;">
+                <h1>Enemy Area</h1>    
+                <div id = "defenderArea">
+
+                </div>     
+            </div>
+            <div class = "col-sm col-md">
+            </div>
+        </div>
+    <!-- A second row to hold the set of character cards waiting for battle -->
+        <div class= "row">
+            <div id = "darthMaul" class ="col-sm-5 col-md-2">
+                <div class="card w-100 mycard" style="width: 2rem;">
+                    <img class="card-img-top" src="assets/images/Darth-Maul-02-icon.png" alt="Card image cap">
+                    <div class="card-body" style="padding: 5px 0 0 0;">
+                        <h5 class="card-title">Darth Maul</h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
+            </div>
+            <div id= "rey" class ="col-sm-5 col-md-2">
+                <div class="card w-100 mycard" style="width: 2rem;">
+                    <img class="card-img-top" src="assets/images/main-thumb-t-1785517-200-boztfctkwxbzmfjwurneimbimaluhaxk.jpeg" alt="Card image cap">
+                    <div class="card-body" style="padding: 5px 0 0 0;">
+                        <h5 class="card-title">Rey</h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
+            </div>
+            <div id= "emperorPalp" class ="col-sm-5 col-md-2">
+                <div class="card w-100 mycard" style="width: 2rem;">
+                    <img class="card-img-top" src="assets/images/rendition1.img.jpg" alt="Card image cap">
+                    <div class="card-body" style="padding: 5px 0 0 0;">
+                        <h5 class="card-title">Emperor</h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
+            </div>
+            <div id = "chewbacca" class ="col-sm-5 col-md-2">
+                <div class="card w-100 mycard" style="width: 2rem;">
+                    <img class="card-img-top" src="assets/images/ChewbaccaROTS.jpg" alt="Card image cap">
+                    <div class="card-body" style="padding: 5px 0 0 0;">
+                        <h5 class="card-title">Chewy</h5>
+                        <p class="card-text"></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class = "col-sm">
+
+            </div>
+        </div>
+
+    </section>
+    <!-- My copyright footer        -->
+    <footer class="footer my-footer">
+            <div class="container">
+                <span>@Copyright </span>
+            </div>
+    </footer>
+
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script type="text/javascript" src="assets/javascript/game.js"></script>
+
+</body>
+</html>
