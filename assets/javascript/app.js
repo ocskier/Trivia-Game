@@ -6,18 +6,32 @@ var questionlist = [
      ,{question: "The Dingo is a dog native to what country?", 
      Answer: "Australia", 
      Wrong: ["Spain", "United States", "Great Britain"]}];
+var right = 0;
+var wrong = 0;
+var unanswr = 0;
+
 
 $("#start").on("click", function() {
     console.log(questionlist);
     var i=0;
+
     function resetClock() {
         $("#qna-box").empty();
         var number = 20;    
         var newClock = $('<p id="clock" class="lead"></p>');
         var newQuestion = $('<p id="question" class="lead">'+questionlist[i].question+'?</p>');
         var newAnswerDiv = $('<div id="answers" class="list-group">');
-        for (var j=1; j<5; j++) {
-        newAnswerDiv.append('<button type="button" class="list-group-item list-group-item-action">'+questionlist[i].Answer+'</button>');
+        var randomAnswrSpot = Math.floor(Math.random()*4)+1;
+        var k = 0;
+
+        for (var j=1; j < 5; j++) {
+        if (j == randomAnswrSpot) {
+            newAnswerDiv.append('<button type="button" class="list-group-item list-group-item-action">'+ questionlist[i].Answer +'</button>');
+        }
+        else {
+            newAnswerDiv.append('<button type="button" class="list-group-item list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
+            k++;
+        }
         }
         $("#qna-box").append(newClock).append(newQuestion).append(newAnswerDiv);
         
@@ -40,7 +54,6 @@ $("#start").on("click", function() {
               stop();
       
               //  Alert the user that time is up.
-              setTimeout(alert("Time Up!"), 1000 * 1);
               i++;
               resetClock();
             }
@@ -59,4 +72,5 @@ $("#start").on("click", function() {
         run();
     }
     resetClock();
+
 });
