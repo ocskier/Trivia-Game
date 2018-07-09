@@ -17,21 +17,21 @@
 
     <!-- My main section for the game contents -->
     <section class="container">
-    <!-- A container to hold the game -->
-        <div class="main-container">
-            <h1>Totally Trivial Trivia!</h1>   
-         
+    <!-- A container to hold the game -->    
+        <div class="jumbotron jumbotron-fluid main-container">
+            <div class="container">
+            <h1 class = "display-4 myh1">Totally Trivial Trivia!</h1>   
             <!-- A second row to hold the time remaining and question -->
-            <div class = "clock ">
-            Time remaining
-            </div>
+            <p id="clock" class="lead"></p>
             <!-- A third row to hold the answers to the question -->
-            <div class = "question">
-                What is the question?
+            <p id="question" class="lead">
+                What is the question?</p>
+            <div id="answers" class="list-group">
+                <button type="button" class="list-group-item list-group-item-action">Answer 1</button>
+                <button type="button" class="list-group-item list-group-item-action">Answer 2</button>
+                <button type="button" class="list-group-item list-group-item-action">Answer 3</button>
+                <button type="button" class="list-group-item list-group-item-action">Answer 4</button>
             </div>
-        
-            <div class = "answers">
-                Answer 1<br>Answer 2<br>Answer 3<br> Answer 4
             </div>
         </div>
     </section>
@@ -46,7 +46,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-<script type="text/javascript" src="assets/javascript/game.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script>
 
 </body>
 </html>

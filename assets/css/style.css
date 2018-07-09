@@ -4,7 +4,7 @@
 
 body {
     background: rgb(219, 217, 217);
-    background: url(../images/puzzle-1816474_1920.jpg) no-repeat center center fixed;
+    background: url(../images/victorian-2472338_1920.jpg) no-repeat center center fixed;
     background-repeat:  no-repeat;
     background-position:  center;
     background-attachment: fixed;
@@ -22,27 +22,30 @@ section {
     width:100%;
 }
 .main-container {
-    margin: 10px 50px 20px;
-    background: cyan;
-    font-family: 'Ubuntu', sans-serif;
+    padding-top: 10px;
+    margin: 25px 100px 25px;
+    background: lavenderblush;
 }
 
-h1 {
+.myh1 {
     padding: 15px;
-    margin: 0 auto 80px;
+    margin: 0 auto 60px;
     color: red;
     font-size: 64px;
+    font-weight: 500;
 }
-.clock, .question, .answers {
-    padding: 20px ;
+#clock, #question, #answers {
+    padding: 10px ;
     border: 2px solid blue;
 }
 
-.clock, .question {
+#clock, #question {
     font-size: 20px;
 }
 
-.answers {
+#answers {
+    width: 80%;
+    margin: 0 auto;
     font-size: 28px;
 }
 
