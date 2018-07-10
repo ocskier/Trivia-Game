@@ -15,6 +15,14 @@ $("#start").on("click", function() {
     console.log(questionlist);
     var i=0;
 
+    function printResults () {
+        $("#qna-box").empty();
+                $("#qna-box").append('<p>Results</p>');
+                $("#qna-box").append('<p>You got '+numRight+' correct!</p>');
+                $("#qna-box").append('<p>You got '+numWrong+' wrong!</p>');
+                $("#qna-box").append('<p>You left '+numUnanswrd+' questions unanswered!</p>');
+    }
+
     function resetClock() {
         $("#qna-box").empty();
         var number = 20;    
@@ -58,7 +66,10 @@ $("#start").on("click", function() {
               if (i<questionlist.length) {
                 numUnanswrd++;
                 resetClock();
-            }
+              }
+                else {
+                  printResults();
+              }
             }
                 //  Show the number in the #show-number tag.
             $("#clock").text("Time remaining: "+number + " secs!");
@@ -88,11 +99,7 @@ $("#start").on("click", function() {
             resetClock();
             }
             else {
-                $("#qna-box").empty();
-                $("#qna-box").append('<p>Results</p>');
-                $("#qna-box").append('<p>You got '+numRight+' correct!</p>');
-                $("#qna-box").append('<p>You got '+numWrong+' wrong!</p>');
-                $("#qna-box").append('<p>You left '+numUnanswrd+' questions unanswered!</p>');
+                printResults();
             }
         });
 
