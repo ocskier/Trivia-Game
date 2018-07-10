@@ -2,23 +2,23 @@ var intervalId;
 var questionlist = [
     {Question: "What is the largest rodent found in North America",
      Answer: 
-        {Name: "Beaver", Url: "assets/images/beaver-1448389_640.jpg"},
+        {Name: "Beaver", Url: '<img style="width: 175px; height:175px;" src="assets/images/beaver-1448389_640.jpg">'},
      Wrong: ["Rat", "Squirrel","Mouse"]},
     {Question: "The Dingo is a dog native to what country?", 
      Answer: 
-        {Name: "Australia", Url: "assets/images/dingo-1356866_640.jpg"},
+        {Name: "Australia", Url: '<img style="width: 175px; height:175px;" src="assets/images/dingo-1356866_640.jpg">'},
      Wrong: ["Spain", "United States", "Great Britain"]},
     {Question: "What is the only bird that can fly backwards?", 
      Answer: 
-        {Name: "Hummingbird", Url: ""},
+        {Name: "Hummingbird", Url: '<video width="256" height="148" autoplay><source src="assets/images/Hummingbird - 10281.mp4" type="video/mp4"></video>'},
      Wrong: ["Cockatiel", "Ostrich", "Peacock"]},
     {Question: "What horse breed is best used for racing?",
      Answer: 
-        {Name: "Thouroughbred", Url: ""},
+        {Name: "Thouroughbred", Url: '<video width="256" height="148" autoplay><source src="assets/images/Flies Swarming on a Horse.mp4"></video>'},
      Wrong: ["Palomino","Warmblood","Shire"]},
     {Question: "What animal has the largest brain?",
      Answer:
-        {Name: "Sperm Whale", Url: ""},
+        {Name: "Sperm Whale", Url: '<video width="240" height="180" autoplay><source src="assets/images/Hummingbird - 10281.mp4" type="video/mp4"></video>'},
      Wrong: ["Elephant","Frog","Human"]},
     {Question: "What is the only continent with no bees?",
      Answer: 
@@ -121,6 +121,7 @@ $("#start").on("click", function() {
         
         $("button").on("click", function(e) {
             var valClicked = e.target.value;
+            $("#clock").empty();
             $("#answers").empty();
             if (valClicked==randomAnswrSpot) {
                 numRight++;
@@ -130,7 +131,8 @@ $("#start").on("click", function() {
                 numWrong++;
                 $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             }
-            $('#answers').append('<div><img style="width: 175px; height:175px; margin:0 auto;" src="'+questionlist[i].Answer.Url+'" alt = "Cap Pic"></div>');
+            $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
+            $('#answrMedia').append(questionlist[i].Answer.Url);
             i++;
             if (i<questionlist.length) {
                 stop();
