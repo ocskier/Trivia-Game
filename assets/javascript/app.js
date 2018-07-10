@@ -1,34 +1,44 @@
 var intervalId;
 var questionlist = [
     {Question: "What is the largest rodent found in North America",
-     Answer: "Beaver",
+     Answer: 
+        {Name: "Beaver", Url: "assets/images/beaver-1448389_640.jpg"},
      Wrong: ["Rat", "Squirrel","Mouse"]},
     {Question: "The Dingo is a dog native to what country?", 
-     Answer: "Australia", 
+     Answer: 
+        {Name: "Australia", Url: "assets/images/dingo-1356866_640.jpg"},
      Wrong: ["Spain", "United States", "Great Britain"]},
     {Question: "What is the only bird that can fly backwards?", 
-     Answer: "Hummingbird",
+     Answer: 
+        {Name: "Hummingbird", Url: ""},
      Wrong: ["Cockatiel", "Ostrich", "Peacock"]},
     {Question: "What horse breed is best used for racing?",
-     Answer: "Thouroughbred",
+     Answer: 
+        {Name: "Thouroughbred", Url: ""},
      Wrong: ["Palomino","Warmblood","Shire"]},
     {Question: "What animal has the largest brain?",
-     Answer: "Sperm Whale",
+     Answer:
+        {Name: "Sperm Whale", Url: ""},
      Wrong: ["Elephant","Frog","Human"]},
     {Question: "What is the only continent with no bees?",
-     Answer: "Antarctica",
+     Answer: 
+        {Name: "Antarctica", Url: ""},
      Wrong: ["Africa", "Asia", "South America"]},
     {Question: "What is the tallest animal in the world?",
-     Answer: "Giraffe",
+     Answer: 
+        {Name: "Giraffe", Url: ""},
      Wrong: ["Tiger", "Elephant", "Horse"]},
     {Question: "What is a flock of crows called?",
-     Answer: "Murder",
+     Answer: 
+        {Name: "Murder", Url:""},
      Wrong: ["Herd", "Pride","Colony"]},
     {Question: "How many chambers in a dogs heart?",
-     Answer: "Four",
+     Answer: 
+        {Name: "Four", Url:""},
      Wrong: ["Two", "Three", "Five"]},
     {Question: "A koalas diet consists mostly of leaves from what tree?",
-     Answer: "Eucalyptus",
+     Answer: 
+        {Name: "Eucalyptus", Url: ""},
      Wrong: ["Aspen", "Fir", "Pine"]}];
 var numRight = 0;
 var numWrong = 0;
@@ -58,7 +68,7 @@ $("#start").on("click", function() {
 
         for (var j=1; j < 5; j++) {
         if (j == randomAnswrSpot) {
-            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Answer +'</button>');
+            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Answer.Name +'</button>');
         }
         else {
             newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
@@ -118,8 +128,9 @@ $("#start").on("click", function() {
             }
             else {
                 numWrong++;
-                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer+'!!!</div>');
+                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             }
+            $('#answers').append('<div><img style="width: 175px; height:175px; margin:0 auto;" src="'+questionlist[i].Answer.Url+'" alt = "Cap Pic"></div>');
             i++;
             if (i<questionlist.length) {
                 stop();
@@ -128,7 +139,10 @@ $("#start").on("click", function() {
                 },5000);
             }
             else {
-                printResults();
+                stop();
+                setTimeout(function() {
+                    printResults(); 
+                },5000);
             }
         });
 
