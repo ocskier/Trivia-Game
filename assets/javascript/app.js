@@ -6,9 +6,9 @@ var questionlist = [
      ,{question: "The Dingo is a dog native to what country?", 
      Answer: "Australia", 
      Wrong: ["Spain", "United States", "Great Britain"]}];
-var right = 0;
-var wrong = 0;
-var unanswr = 0;
+var numRight = 0;
+var numWrong = 0;
+var numUnanswrd = 0;
 
 
 $("#start").on("click", function() {
@@ -26,10 +26,10 @@ $("#start").on("click", function() {
 
         for (var j=1; j < 5; j++) {
         if (j == randomAnswrSpot) {
-            newAnswerDiv.append('<button type="button" class="list-group-item list-group-item-action">'+ questionlist[i].Answer +'</button>');
+            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Answer +'</button>');
         }
         else {
-            newAnswerDiv.append('<button type="button" class="list-group-item list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
+            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
             k++;
         }
         }
@@ -55,7 +55,10 @@ $("#start").on("click", function() {
       
               //  Alert the user that time is up.
               i++;
-              resetClock();
+              if (i<questionlist.length) {
+                numUnanswrd++;
+                resetClock();
+            }
             }
                 //  Show the number in the #show-number tag.
             $("#clock").text("Time remaining: "+number + " secs!");
@@ -70,7 +73,29 @@ $("#start").on("click", function() {
             clearInterval(intervalId);
           }
         run();
+        $("button").on("click", function(e) {
+            var valClicked = e.target.value;
+            if (valClicked==randomAnswrSpot) {
+            console.log("Correct");
+            numRight++;
+            }
+            else {
+                console.log("Wrong");
+                numWrong++;
+            }
+            i++;
+            if (i<questionlist.length) {
+            resetClock();
+            }
+            else {
+                $("#qna-box").empty();
+                $("#qna-box").append('<p>Results</p>');
+                $("#qna-box").append('<p>You got '+numRight+' correct!</p>');
+                $("#qna-box").append('<p>You got '+numWrong+' wrong!</p>');
+                $("#qna-box").append('<p>You left '+numUnanswrd+' questions unanswered!</p>');
+            }
+        });
+
     }
     resetClock();
-
 });
