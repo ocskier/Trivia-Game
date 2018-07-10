@@ -18,27 +18,27 @@ var questionlist = [
      Wrong: ["Palomino","Warmblood","Shire"]},
     {Question: "What animal has the largest brain?",
      Answer:
-        {Name: "Sperm Whale", Url: '<video width="240" height="180" autoplay><source src="assets/images/Hummingbird - 10281.mp4" type="video/mp4"></video>'},
+        {Name: "Sperm Whale", Url: '<img style="width: 175px; height:175px;" src="assets/images/whale-155390_960_720.png">'},
      Wrong: ["Elephant","Frog","Human"]},
     {Question: "What is the only continent with no bees?",
      Answer: 
-        {Name: "Antarctica", Url: ""},
+        {Name: "Antarctica", Url: '<img style="width: 175px; height:175px;" src="assets/images/antarctica-1987579_1280.jpg">'},
      Wrong: ["Africa", "Asia", "South America"]},
     {Question: "What is the tallest animal in the world?",
      Answer: 
-        {Name: "Giraffe", Url: ""},
+        {Name: "Giraffe", Url: '<img style="width: 175px; height:175px;" src="assets/images/giraffe-2191662_1280.jpg">'},
      Wrong: ["Tiger", "Elephant", "Horse"]},
     {Question: "What is a flock of crows called?",
      Answer: 
-        {Name: "Murder", Url:""},
+        {Name: "Murder", Url:'<video width="256" height="148" autoplay><source src="assets/images/Raven Feeding While on the Ground.mp4"></video>'},
      Wrong: ["Herd", "Pride","Colony"]},
     {Question: "How many chambers in a dogs heart?",
      Answer: 
-        {Name: "Four", Url:""},
+        {Name: "Four", Url:'<img style="width: 175px; height:175px;" src="assets/images/dog-91765_1280.jpg">'},
      Wrong: ["Two", "Three", "Five"]},
     {Question: "A koalas diet consists mostly of leaves from what tree?",
      Answer: 
-        {Name: "Eucalyptus", Url: ""},
+        {Name: "Eucalyptus", Url: '<img style="width: 175px; height:175px;" src="assets/images/koala-61189_640.jpg">'},
      Wrong: ["Aspen", "Fir", "Pine"]}];
 var numRight = 0;
 var numWrong = 0;
@@ -46,22 +46,24 @@ var numUnanswrd = 0;
 
 
 $("#start").on("click", function() {
-    console.log(questionlist);
-    var i=0;
 
+    var i=0;
     function printResults () {
         $("#qna-box").empty();
         $("#qna-box").append ('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">Results</div>');
         $("#qna-box").append('<p>You got '+numRight+' correct!</p>');
         $("#qna-box").append('<p>You got '+numWrong+' wrong!</p>');
         $("#qna-box").append('<p>You left '+numUnanswrd+' questions unanswered!</p>');
+        $("#qna-box").append('<button id="restart" type="button" class="btn btn-primary btn-lg">Restart Game</button>');
     }
 
     function resetClock() {
+        console.log(i);
+        
         $("#qna-box").empty();
         var number = 20;    
         var newClock = $('<p id="clock" class="lead"></p>');
-        var newQuestion = $('<p id="question" class="lead">'+questionlist[i].Question+'?</p>');
+        var newQuestion = $('<p id="question" class="lead">'+questionlist[i].Question+'</p>');
         var newAnswerDiv = $('<div id="answers" class="list-group">');
         var randomAnswrSpot = Math.floor(Math.random()*4)+1;
         var k = 0;
@@ -88,25 +90,37 @@ $("#start").on("click", function() {
       
             //  Decrease number by one.
             number--;
-            
+            $("#clock").text("Time remaining: "+number + " secs!");
+
             //  Once number hits zero...
             if (number === 0) {
       
               //  ...run the stop function.
               stop();
-      
-              //  Alert the user that time is up.
               i++;
               numUnanswrd++;
+
               if (i<questionlist.length) {
-                resetClock();
-              }
+                $("#clock").empty();
+                $("#answers").empty();
+                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i-1].Answer.Name+'!!!</div>');
+                $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
+                $('#answrMedia').append(questionlist[i-1].Answer.Url);
+                setTimeout(function() {
+                    resetClock();
+                },5000);
+                }
               else {
                 printResults();
+                $("#restart").on("click", function() {
+                    i=0;
+                    numRight=0;
+                    numWrong=0;
+                    numUnanswrd = 0;
+                    resetClock();
+                });
               }
             }
-                //  Show the number in the #show-number tag.
-            $("#clock").text("Time remaining: "+number + " secs!");
           }
       
           //  The stop function
@@ -129,7 +143,7 @@ $("#start").on("click", function() {
             }
             else {
                 numWrong++;
-                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
+                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             }
             $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
             $('#answrMedia').append(questionlist[i].Answer.Url);
@@ -142,12 +156,16 @@ $("#start").on("click", function() {
             }
             else {
                 stop();
-                setTimeout(function() {
                     printResults(); 
-                },5000);
+                    $("#restart").on("click", function() {
+                        i=0
+                        numRight=0;
+                        numWrong=0;
+                        numUnanswrd = 0;
+                        resetClock();
+                    });
             }
         });
-
     }
     resetClock();
 });
