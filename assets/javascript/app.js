@@ -111,14 +111,21 @@ $("#start").on("click", function() {
                 },5000);
                 }
               else {
-                printResults();
-                $("#restart").on("click", function() {
-                    i=0;
-                    numRight=0;
-                    numWrong=0;
-                    numUnanswrd = 0;
-                    resetClock();
-                });
+                $("#clock").empty();
+                $("#answers").empty();
+                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i-1].Answer.Name+'!!!</div>');
+                $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
+                $('#answrMedia').append(questionlist[i-1].Answer.Url);
+                setTimeout(function() {
+                    printResults();
+                    $("#restart").on("click", function() {
+                        i=0;
+                        numRight=0;
+                        numWrong=0;
+                        numUnanswrd = 0;
+                        resetClock();
+                    });
+                },5000);
               }
             }
           }
@@ -155,7 +162,13 @@ $("#start").on("click", function() {
                 },5000);
             }
             else {
-                stop();
+                    stop();
+                    $("#clock").empty();
+                $("#answers").empty();
+                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i-1].Answer.Name+'!!!</div>');
+                $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
+                $('#answrMedia').append(questionlist[i-1].Answer.Url);
+                setTimeout(function() {
                     printResults(); 
                     $("#restart").on("click", function() {
                         i=0
@@ -164,6 +177,7 @@ $("#start").on("click", function() {
                         numUnanswrd = 0;
                         resetClock();
                     });
+                },5000);
             }
         });
     }
