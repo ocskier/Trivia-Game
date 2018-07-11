@@ -1,6 +1,6 @@
 var intervalId;
 var questionlist = [
-    {Question: "What is the largest rodent found in North America",
+    {Question: "What is the largest rodent found in North America?",
      Answer: 
         {Name: "Beaver", Url: "assets/images/Beaver.mp4"},
      Wrong: ["Rat", "Squirrel","Mouse"]},
@@ -50,7 +50,7 @@ $("#start").on("click", function() {
     var i=0;
     function printResults () {
         $("#qna-box").empty();
-        $("#qna-box").append ('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">Results</div>');
+        $("#qna-box").append ('<div class="alert alert-success" role="alert" style="width: 66%; margin: 0 auto 10px;">Results</div>');
         $("#qna-box").append('<p>You got '+numRight+' correct!</p>');
         $("#qna-box").append('<p>You got '+numWrong+' wrong!</p>');
         $("#qna-box").append('<p>You left '+numUnanswrd+' questions unanswered!</p>');
@@ -58,8 +58,6 @@ $("#start").on("click", function() {
     }
 
     function resetClock() {
-        console.log(i);
-        
         $("#qna-box").empty();
         var number = 20;    
         var newClock = $('<p id="clock" class="lead"></p>');
@@ -70,10 +68,10 @@ $("#start").on("click", function() {
 
         for (var j=1; j < 5; j++) {
         if (j == randomAnswrSpot) {
-            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Answer.Name +'</button>');
+            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Answer.Name +'</button>');
         }
         else {
-            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
+            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
             k++;
         }
         }
@@ -82,9 +80,9 @@ $("#start").on("click", function() {
         function printAnswer() {
             $("#clock").empty();
             $("#answers").empty();
-            $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
+            $("#answers").append('<div class="alert alert-danger my-danger" role="alert">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
-            $('#answrMedia').append('<video width="300" height="240" loop autoplay><source src='+ questionlist[i].Answer.Url+'></video>');
+            $('#answrMedia').append('<video loop autoplay><source src='+ questionlist[i].Answer.Url+'></video>');
         }
         
         function run () {    
@@ -141,20 +139,22 @@ $("#start").on("click", function() {
         run();
         
         $("button").on("click", function(e) {
-            var valClicked = e.target.value;
+
+            var valClicked = parseInt(e.target.value);
+            
             $("#clock").empty();
             $("#answers").empty();
             if (valClicked==randomAnswrSpot) {
                 numRight++;
-                $('#answers').append('<div class="alert alert-secondary" role="alert" style="width: 66%; margin: 0 auto 10px;">That is the correct answer!!!</div>');
+                $('#answers').append('<div class="alert alert-primary my-correct" role="alert">That is the correct answer!!!</div>');
             }
             else {
                 numWrong++;
-                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
+                $("#answers").append('<div class="alert alert-danger my-danger" role="alert">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             }
             
             $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
-            $('#answrMedia').append('<video width="250" height="200" loop autoplay><source src='+ questionlist[i].Answer.Url+'></video');
+            $('#answrMedia').append('<video loop autoplay><source src='+ questionlist[i].Answer.Url+'></video');
 
             if (i<questionlist.length-1) {
                 stop();
@@ -165,7 +165,6 @@ $("#start").on("click", function() {
             }
             else {
                 stop();
-                printAnswer();
                 i++;
                 setTimeout(function() {
                     printResults(); 
