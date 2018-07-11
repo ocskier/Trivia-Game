@@ -2,43 +2,43 @@ var intervalId;
 var questionlist = [
     {Question: "What is the largest rodent found in North America",
      Answer: 
-        {Name: "Beaver", Url: '<img style="width: 175px; height:175px;" src="assets/images/beaver-1448389_640.jpg">'},
+        {Name: "Beaver", Url: "assets/images/Beaver.mp4"},
      Wrong: ["Rat", "Squirrel","Mouse"]},
     {Question: "The Dingo is a dog native to what country?", 
      Answer: 
-        {Name: "Australia", Url: '<img style="width: 175px; height:175px;" src="assets/images/dingo-1356866_640.jpg">'},
+        {Name: "Australia", Url: "assets/images/Dingo.mp4"},
      Wrong: ["Spain", "United States", "Great Britain"]},
     {Question: "What is the only bird that can fly backwards?", 
      Answer: 
-        {Name: "Hummingbird", Url: '<video width="256" height="148" autoplay><source src="assets/images/Hummingbird - 10281.mp4" type="video/mp4"></video>'},
+        {Name: "Hummingbird", Url: "assets/images/Hummingbird-10281.mp4"},
      Wrong: ["Cockatiel", "Ostrich", "Peacock"]},
     {Question: "What horse breed is best used for racing?",
      Answer: 
-        {Name: "Thouroughbred", Url: '<video width="256" height="148" autoplay><source src="assets/images/Flies Swarming on a Horse.mp4"></video>'},
+        {Name: "Thouroughbred", Url: "assets/images/Secretariat.mp4"},
      Wrong: ["Palomino","Warmblood","Shire"]},
     {Question: "What animal has the largest brain?",
      Answer:
-        {Name: "Sperm Whale", Url: '<img style="width: 175px; height:175px;" src="assets/images/whale-155390_960_720.png">'},
+        {Name: "Sperm Whale", Url: "assets/images/SpermWhale.mp4"},
      Wrong: ["Elephant","Frog","Human"]},
     {Question: "What is the only continent with no bees?",
      Answer: 
-        {Name: "Antarctica", Url: '<img style="width: 175px; height:175px;" src="assets/images/antarctica-1987579_1280.jpg">'},
+        {Name: "Antarctica", Url: "assets/images/Antarctica.mp4"},
      Wrong: ["Africa", "Asia", "South America"]},
     {Question: "What is the tallest animal in the world?",
      Answer: 
-        {Name: "Giraffe", Url: '<img style="width: 175px; height:175px;" src="assets/images/giraffe-2191662_1280.jpg">'},
+        {Name: "Giraffe", Url: "assets/images/Giraffe.mp4"},
      Wrong: ["Tiger", "Elephant", "Horse"]},
     {Question: "What is a flock of crows called?",
      Answer: 
-        {Name: "Murder", Url:'<video width="256" height="148" autoplay><source src="assets/images/Raven Feeding While on the Ground.mp4"></video>'},
+        {Name: "Murder", Url:"assets/images/Crow.mp4"},
      Wrong: ["Herd", "Pride","Colony"]},
     {Question: "How many chambers in a dogs heart?",
      Answer: 
-        {Name: "Four", Url:'<img style="width: 175px; height:175px;" src="assets/images/dog-91765_1280.jpg">'},
+        {Name: "Four", Url:"assets/images/DogHeart.mp4"},
      Wrong: ["Two", "Three", "Five"]},
     {Question: "A koalas diet consists mostly of leaves from what tree?",
      Answer: 
-        {Name: "Eucalyptus", Url: '<img style="width: 175px; height:175px;" src="assets/images/koala-61189_640.jpg">'},
+        {Name: "Eucalyptus", Url: "assets/images/Koala.mp4"},
      Wrong: ["Aspen", "Fir", "Pine"]}];
 var numRight = 0;
 var numWrong = 0;
@@ -79,6 +79,14 @@ $("#start").on("click", function() {
         }
         $("#qna-box").append(newClock).append(newQuestion).append(newAnswerDiv);
         
+        function printAnswer() {
+            $("#clock").empty();
+            $("#answers").empty();
+            $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
+            $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
+            $('#answrMedia').append('<video width="300" height="240" loop autoplay><source src='+ questionlist[i].Answer.Url+'></video>');
+        }
+        
         function run () {    
             clearInterval(intervalId);
             intervalId = setInterval(decrement, 1000);
@@ -87,7 +95,7 @@ $("#start").on("click", function() {
           
           //  The decrement function.
         function decrement() {
-      
+            
             //  Decrease number by one.
             number--;
             $("#clock").text("Time remaining: "+number + " secs!");
@@ -97,25 +105,17 @@ $("#start").on("click", function() {
       
               //  ...run the stop function.
               stop();
-              i++;
               numUnanswrd++;
 
-              if (i<questionlist.length) {
-                $("#clock").empty();
-                $("#answers").empty();
-                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i-1].Answer.Name+'!!!</div>');
-                $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
-                $('#answrMedia').append(questionlist[i-1].Answer.Url);
+              if (i<questionlist.length-1) {
+                printAnswer();
+                i++;
                 setTimeout(function() {
                     resetClock();
                 },5000);
                 }
               else {
-                $("#clock").empty();
-                $("#answers").empty();
-                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i-1].Answer.Name+'!!!</div>');
-                $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
-                $('#answrMedia').append(questionlist[i-1].Answer.Url);
+                printAnswer();
                 setTimeout(function() {
                     printResults();
                     $("#restart").on("click", function() {
@@ -152,22 +152,21 @@ $("#start").on("click", function() {
                 numWrong++;
                 $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             }
-            $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
-            $('#answrMedia').append(questionlist[i].Answer.Url);
-            i++;
-            if (i<questionlist.length) {
+            
+            $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
+            $('#answrMedia').append('<video width="250" height="200" loop autoplay><source src='+ questionlist[i].Answer.Url+'></video');
+
+            if (i<questionlist.length-1) {
                 stop();
+                i++;
                 setTimeout(function() {
                     resetClock();
                 },5000);
             }
             else {
-                    stop();
-                    $("#clock").empty();
-                $("#answers").empty();
-                $("#answers").append('<div class="alert alert-secondary" role="alert" style="width: 80%; margin: 0 auto 10px;">The correct answer is '+questionlist[i-1].Answer.Name+'!!!</div>');
-                $('#answers').append('<div id="answrMedia" style="margin:0 auto; border: 2px solid gray;"></div>');
-                $('#answrMedia').append(questionlist[i-1].Answer.Url);
+                stop();
+                printAnswer();
+                i++;
                 setTimeout(function() {
                     printResults(); 
                     $("#restart").on("click", function() {
