@@ -79,7 +79,7 @@ video {
     border-top: 8px solid rgb(62,62,92);
 }
 
-/* Media Query to adjust look */
+/* Media Query to resize videos and answer buttons and correct answer alerts */
 
 @media screen and (max-width: 576px) {
     video {

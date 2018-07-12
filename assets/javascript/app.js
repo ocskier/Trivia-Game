@@ -1,4 +1,7 @@
+// Javascript File
+// A variable for the interval amount
 var intervalId;
+// An array holding question objects
 var questionlist = [
     {Question: "What is the largest rodent found in North America?",
      Answer: 
@@ -40,14 +43,17 @@ var questionlist = [
      Answer: 
         {Name: "Eucalyptus", Url: "assets/images/Koala.mp4"},
      Wrong: ["Aspen", "Fir", "Pine"]}];
+
+// Three variables for the results
 var numRight = 0;
 var numWrong = 0;
 var numUnanswrd = 0;
 
-
+// The main click event handler for starting the game
 $("#start").on("click", function() {
-
+    // Setting the game to start with the first question
     var i=0;
+    // A function for printing results at the end of the game
     function printResults () {
         $("#qna-box").empty();
         $("#qna-box").append ('<div class="alert alert-success" role="alert" style="width: 66%; margin: 0 auto 10px;">Results</div>');
@@ -56,16 +62,27 @@ $("#start").on("click", function() {
         $("#qna-box").append('<p>You left '+numUnanswrd+' questions unanswered!</p>');
         $("#qna-box").append('<button id="restart" type="button" class="btn btn-primary btn-lg">Restart Game</button>');
     }
-
+    // A function for resetting the clock every 20 secs
     function resetClock() {
+        
+        // Clearing the question and answer div 
         $("#qna-box").empty();
+        
+        // Twenty second start time
         var number = 20;    
+        
+        // Variables for the clock, question, and answer choice containers
         var newClock = $('<p id="clock" class="lead"></p>');
         var newQuestion = $('<p id="question" class="lead">'+questionlist[i].Question+'</p>');
         var newAnswerDiv = $('<div id="answers" class="list-group">');
+        
+        // Random number from 1 to 4 
         var randomAnswrSpot = Math.floor(Math.random()*4)+1;
+        
+        // A variable for incrementing thru the wrong answers
         var k = 0;
-
+        
+        // Printing the four answer choices dynamically with the answer in random spot  
         for (var j=1; j < 5; j++) {
         if (j == randomAnswrSpot) {
             newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Answer.Name +'</button>');
@@ -75,8 +92,10 @@ $("#start").on("click", function() {
             k++;
         }
         }
+        // Dynamically adding the whole game box to DOM
         $("#qna-box").append(newClock).append(newQuestion).append(newAnswerDiv);
         
+        // Clearing the clock and question and answers and displaying the correct choice and video
         function printAnswer() {
             $("#clock").empty();
             $("#answers").empty();
@@ -84,14 +103,14 @@ $("#start").on("click", function() {
             $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
             $('#answrMedia').append('<video loop autoplay><source src='+ questionlist[i].Answer.Url+'></video>');
         }
-        
+        // Start the clock and dynamically updating
         function run () {    
             clearInterval(intervalId);
             intervalId = setInterval(decrement, 1000);
             $("#clock").text("Time remaining: "+number + " secs!");
             }
           
-          //  The decrement function.
+        //  Decreasing the clock
         function decrement() {
             
             //  Decrease number by one.
@@ -101,21 +120,25 @@ $("#start").on("click", function() {
             //  Once number hits zero...
             if (number === 0) {
       
-              //  ...run the stop function.
+              // Run the stop function add 1 to unanswered questions
               stop();
               numUnanswrd++;
-
+                // If not out of questions print answer add 1 to question count   
               if (i<questionlist.length-1) {
                 printAnswer();
                 i++;
+
+                // Give the user 5 secs to see answer and video
                 setTimeout(function() {
                     resetClock();
                 },5000);
                 }
-              else {
+                // If out of questions print the last answer, wait 5 secs, then the game results    
+                else {
                 printAnswer();
                 setTimeout(function() {
                     printResults();
+                    // On clicking restart button set all game variables back to 0
                     $("#restart").on("click", function() {
                         i=0;
                         numRight=0;
@@ -136,14 +159,16 @@ $("#start").on("click", function() {
             //  to the clearInterval function.
             clearInterval(intervalId);
         }
+        // Calling the run function
         run();
-        
+        // The main click event handler for picking an answer
         $("button").on("click", function(e) {
-
+            // Finding the question number for the user choice
             var valClicked = parseInt(e.target.value);
-            
+            // Empty the clock and answers
             $("#clock").empty();
             $("#answers").empty();
+            // Print if correct or the correct answer if wrong
             if (valClicked==randomAnswrSpot) {
                 numRight++;
                 $('#answers').append('<div class="alert alert-primary my-correct" role="alert">That is the correct answer!!!</div>');
@@ -152,10 +177,10 @@ $("#start").on("click", function() {
                 numWrong++;
                 $("#answers").append('<div class="alert alert-danger my-danger" role="alert">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             }
-            
+            // Add a container and the pertinent video for the answer
             $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
             $('#answrMedia').append('<video loop autoplay><source src='+ questionlist[i].Answer.Url+'></video');
-
+            // Reset the clock and the next question after displaying the answer
             if (i<questionlist.length-1) {
                 stop();
                 i++;
@@ -163,6 +188,7 @@ $("#start").on("click", function() {
                     resetClock();
                 },5000);
             }
+            // Stop the clock and print results if all questions answered
             else {
                 stop();
                 i++;
@@ -179,5 +205,6 @@ $("#start").on("click", function() {
             }
         });
     }
+    // Call to function for restarting the clock
     resetClock();
 });
