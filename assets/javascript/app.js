@@ -51,9 +51,6 @@ var numUnanswrd = 0;
 
 window.customElements.define('progress-ring', ProgressRing);
 
-// emulate progress attribute change
-let progress = 100;
-
 // The main click event handler for starting the game
 $("#start").on("click", function() {
     // Setting the game to start with the first question
@@ -75,6 +72,8 @@ $("#start").on("click", function() {
         
         // Twenty second start time
         var number = 20;    
+        // emulate progress attribute change
+        var progress = 100;
         
         // Variables for the clock, question, and answer choice containers
         var newClock = $('<p id="clock" class="lead">Time remaining: (secs)</p>');
@@ -119,11 +118,20 @@ $("#start").on("click", function() {
             
             //  Decrease number by one.
             number--;
-            progress-= 5;
+            // intervalId2 = setInterval(function() {
+            //     progress-= 1;
+            //     $('progress-ring').attr('progress', progress);
+            //     console.log(progress);
+            // },200);
+            progress-=5;
             $('progress-ring').attr('progress', progress);
             $('#time-indicator span').text(number);
-
+            console.log(progress);
+            // clearInterval(intervalId2);
             //  Once number hits zero...
+            // setTimeout(function() {
+            //     clearInterval(intervalId2);
+            // },1000);
             if (number === 0) {
       
               // Run the stop function add 1 to unanswered questions
@@ -138,9 +146,9 @@ $("#start").on("click", function() {
                 setTimeout(function() {
                     resetClock();
                 },5000);
-                }
+              }
                 // If out of questions print the last answer, wait 5 secs, then the game results    
-                else {
+              else {
                 printAnswer();
                 setTimeout(function() {
                     printResults();
@@ -155,7 +163,7 @@ $("#start").on("click", function() {
                 },5000);
               }
             }
-          }
+        }
       
           //  The stop function
         function stop() {
@@ -165,7 +173,6 @@ $("#start").on("click", function() {
             //  to the clearInterval function.
             $("#clock").empty();
             $("#time-indicator").empty();
-            progress = 100;
             clearInterval(intervalId);
         }
         // Calling the run function
