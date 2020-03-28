@@ -49,6 +49,8 @@ var numRight = 0;
 var numWrong = 0;
 var numUnanswrd = 0;
 
+window.customElements.define('progress-ring', ProgressRing);
+
 // The main click event handler for starting the game
 $("#start").on("click", function() {
     // Setting the game to start with the first question
@@ -70,9 +72,12 @@ $("#start").on("click", function() {
         
         // Twenty second start time
         var number = 20;    
+        // emulate progress attribute change
+        var progress = 100;
         
         // Variables for the clock, question, and answer choice containers
-        var newClock = $('<p id="clock" class="lead"></p>');
+        var newClock = $('<p id="clock" class="lead">Time remaining: (secs)</p>');
+        var newTimeIndicator = $('<div id="time-indicator" style="position: relative;display: flex;justify-content: center;flex-direction: column"><progress-ring stroke="4" radius="45" progress="100"></progress-ring><span style="bottom: 62px;position: relative;"></span></div>');
         var newQuestion = $('<p id="question" class="lead">'+questionlist[i].Question+'</p>');
         var newAnswerDiv = $('<div id="answers" class="list-group">');
         
@@ -84,20 +89,19 @@ $("#start").on("click", function() {
         
         // Printing the four answer choices dynamically with the answer in random spot  
         for (var j=1; j < 5; j++) {
-        if (j == randomAnswrSpot) {
-            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Answer.Name +'</button>');
-        }
-        else {
-            newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
-            k++;
-        }
+            if (j == randomAnswrSpot) {
+                newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Answer.Name +'</button>');
+            }
+            else {
+                newAnswerDiv.append('<button type="button" value ="'+j+'" class="list-group-item list-group-item-info list-group-item-action">'+ questionlist[i].Wrong[k] +'</button>');
+                k++;
+            }
         }
         // Dynamically adding the whole game box to DOM
-        $("#qna-box").append(newClock).append(newQuestion).append(newAnswerDiv);
+        $("#qna-box").append(newClock).append(newTimeIndicator).append(newQuestion).append(newAnswerDiv);
         
         // Clearing the clock and question and answers and displaying the correct choice and video
         function printAnswer() {
-            $("#clock").empty();
             $("#answers").empty();
             $("#answers").append('<div class="alert alert-danger my-danger" role="alert">The correct answer is '+questionlist[i].Answer.Name+'!!!</div>');
             $('#answers').append('<div id="answrMedia" style="margin:0 auto;"></div>');
@@ -107,17 +111,27 @@ $("#start").on("click", function() {
         function run () {    
             clearInterval(intervalId);
             intervalId = setInterval(decrement, 1000);
-            $("#clock").text("Time remaining: "+number + " secs!");
-            }
+        }
           
         //  Decreasing the clock
         function decrement() {
             
             //  Decrease number by one.
             number--;
-            $("#clock").text("Time remaining: "+number + " secs!");
-
+            // intervalId2 = setInterval(function() {
+            //     progress-= 1;
+            //     $('progress-ring').attr('progress', progress);
+            //     console.log(progress);
+            // },200);
+            progress-=5;
+            $('progress-ring').attr('progress', progress);
+            $('#time-indicator span').text(number);
+            console.log(progress);
+            // clearInterval(intervalId2);
             //  Once number hits zero...
+            // setTimeout(function() {
+            //     clearInterval(intervalId2);
+            // },1000);
             if (number === 0) {
       
               // Run the stop function add 1 to unanswered questions
@@ -132,9 +146,9 @@ $("#start").on("click", function() {
                 setTimeout(function() {
                     resetClock();
                 },5000);
-                }
+              }
                 // If out of questions print the last answer, wait 5 secs, then the game results    
-                else {
+              else {
                 printAnswer();
                 setTimeout(function() {
                     printResults();
@@ -149,7 +163,7 @@ $("#start").on("click", function() {
                 },5000);
               }
             }
-          }
+        }
       
           //  The stop function
         function stop() {
@@ -157,6 +171,8 @@ $("#start").on("click", function() {
             //  Clears our intervalId
             //  We just pass the name of the interval
             //  to the clearInterval function.
+            $("#clock").empty();
+            $("#time-indicator").empty();
             clearInterval(intervalId);
         }
         // Calling the run function
