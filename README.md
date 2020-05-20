@@ -1,7 +1,7 @@
 # Trivia-Game
 Advanced Trivia Game
 
-<img src="./assets/images/Screen Shot 2020-05-20 at 1.39.27 PM.png" width=600 alt="Trivia-Game/index.html">
+<img src="./assets/images/Screen Shot 2020-05-20 at 1.39.27 PM.png" width=900 alt="Trivia-Game/index.html">
 
 ### Instructions
 
