@@ -23,4 +23,4 @@ Advanced Trivia Game
 
 * There is a restart button at the end for playing the game again
 
-* Have fun! This game can also be found in my portfolio @ https://ocskier.github.io/Bootstrap-Portfolio/portfolio.html
+* Have fun! This game can also be found in my portfolio @ https://ocskier.github.io/JRJ-Folio/
