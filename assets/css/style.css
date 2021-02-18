@@ -53,6 +53,18 @@ section {
     width: 66%;
 }
 
+#time-indicator {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#time-indicator span {
+    bottom: 62px;
+    position: relative;
+}
+
 .my-correct {
     width: 66%;
     margin: 0 auto 10px;
